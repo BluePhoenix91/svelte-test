@@ -1,43 +1,20 @@
 <script lang="ts">
-  import type { ToDo } from "./models/todo";
-
-  export let todo: ToDo;
-  export let name: string;
-
-  enum CompassDirection {
-    North,
-    East,
-    South,
-    West,
-  }
-
+  import { Router, Route } from "svelte-navigator";
+  import Breadcrumbs from "./app/components/breadcrumbs.svelte";
+  import NavMenu from "./app/components/nav-menu.svelte";
+  import Historian from "./app/pages/download/historian.svelte";
+  import Licenses from "./app/pages/licenses/licenses.svelte";
 </script>
 
 <main>
-  <h1>Hello {name}!</h1>
-  <p>todo = {CompassDirection.East}</p>
+  <Router>
+    <NavMenu />
+    <Breadcrumbs />
+    <Route path="downloads" component={Historian} />
+    <Route path="licenses" components={Licenses} />
+  </Router>
 </main>
 
-<style lang="scss">
-	@import './scss/variables.scss';
-
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    color: $svelte-red;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
+<style global lang="scss">
+  @import "./scss/_base.scss";
 </style>

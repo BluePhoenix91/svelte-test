@@ -40,7 +40,18 @@ export default {
 	},
 	plugins: [
 		svelte({
-			preprocess: sveltePreprocess({ sourceMap: !production }),
+			preprocess: sveltePreprocess({ 
+				sourceMap: !production,
+				scss: {
+					includePaths: [
+						'node_modules',
+						'src'
+					]
+				},
+				postcss: {
+					plugins: [require('autoprefixer')()]
+				}
+			}),
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
